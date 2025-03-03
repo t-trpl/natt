@@ -1,0 +1,3 @@
+/home/ty/natt/build/CMakeFiles/natt.dir
+/home/ty/natt/build/CMakeFiles/edit_cache.dir
+/home/ty/natt/build/CMakeFiles/rebuild_cache.dir
