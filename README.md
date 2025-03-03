@@ -1,5 +1,5 @@
 # About
--  Asimple x11 screen temperature scheduler
+-  A simple x11 screen temperature scheduler
 
 # Notice
 - I have no formal education with gtk, so please excuse any glaring design flaw.
@@ -24,7 +24,7 @@
 - you can hide the program to tray by running with flag "-h" or "--hidden" example "{abspath}/natt -h" "{abspath}/natt --hidden"
 - the way i intended for this program to be used is to configure once and just run on start up with the hidden option. Note you do need to enable natt once for the daemon to run
 
-# building
+# Building
 - just run the script ./abuild.sh and the binary will be located at ./build/natt
 
 # AUR
