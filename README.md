@@ -1,7 +1,7 @@
 # About
 -  A simple x11 screen temperature scheduler
 # Image
-![image](https://github.com/user-attachments/assets/d9b38d00-8307-4840-871c-bd2b73ca39cb)
+![image](img/img.png)
 
 # Notice
 - I have no formal education with gtk, so please excuse any glaring design flaw.
