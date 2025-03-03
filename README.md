@@ -30,5 +30,5 @@
 - just run the script ./abuild.sh and the binary will be located at ./build/natt
 
 # AUR
-Avaiable on aur https://aur.archlinux.org/packages/natt
+Available on aur https://aur.archlinux.org/packages/natt
 
