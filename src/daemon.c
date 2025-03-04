@@ -26,10 +26,9 @@ void* flux(void* arg)
     state.temp = start_temp.temp;
     int step = state.temp < target_temp ? 1 : -1;
     state.brightness = 1.0;
-    
-    update_label_data* label_data = (update_label_data*)malloc(sizeof(update_label_data));
-    label_data->nd = nd;
     while (atomic_load(&nd->sd->natt_demon_on) && state.temp != target_temp) {
+        update_label_data* label_data = (update_label_data*)malloc(sizeof(update_label_data));
+        label_data->nd = nd;
         state.temp += step;
         for (int screen = screen_first; screen <= screen_last; screen++) {
             sct_for_screen(nd->dd->dpy, screen, crtc_specified, state);
@@ -38,7 +37,6 @@ void* flux(void* arg)
         g_idle_add(update_current_label, label_data);
         usleep(step_sleep);
     }
-    free(label_data);
     atomic_store(&nd->sd->active, false);
     return NULL;
 }

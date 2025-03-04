@@ -400,6 +400,7 @@ gboolean update_current_label(gpointer user_data)
     snprintf(buff, sizeof(buff), "%d%c", temp, 'k');
     //printf("%s\n", buff);
     gtk_label_set_text(GTK_LABEL(nd->wp->live_temp), buff);
+    free(data);
     return FALSE;
 }
 
