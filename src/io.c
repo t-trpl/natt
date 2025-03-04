@@ -5,8 +5,8 @@
 void write_config(natt_data* nd)
 {
     const char* home = getenv("HOME");
-    const char* config_dir = "/.natt";
-    const char* config_file = "/.natt/natt.cfg";
+    const char* config_dir = "/.config";
+    const char* config_file = "/.config/natt.conf";
     if (!home) {
         fprintf(stderr, "No home...\n");
         return;
@@ -52,14 +52,13 @@ void write_config(natt_data* nd)
 void read_config(natt_data* nd)
 {
     const char* home = getenv("HOME");
-    const char* dest = "/.natt/natt.cfg";
+    const char* dest = "/.config/natt.conf";
     if (!home) {
         fprintf(stderr, "No home...\n");
         return;
     }
     char path[1024];
     snprintf(path, sizeof(path), "%s%s", home, dest);
-    printf("%s\n", path);
     FILE *config;
     temperature_data* temp_data = nd->td;
     state_data* sd = nd->sd;
@@ -92,6 +91,5 @@ void read_config(natt_data* nd)
         }
         qsort(temp_points, temp_data->temp_size, sizeof(temp_point), compare);
         fclose(config);
-        //printf("%d\n", temp_data->temp_size);
     }
 }

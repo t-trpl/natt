@@ -245,7 +245,7 @@ void on_switch_toggled(GtkSwitch* sw, gboolean state, gpointer user_data)
     
     if (sd->state_change) {
         pthread_mutex_lock(nd->sd->temp_lock);
-        temp_point* points = (temp_point*)malloc(sizeof(temp_point) * td->temp_size);
+        temp_point* points = (temp_point*)malloc(sizeof(temp_point) * 100);
         int j = 0;
         for (int i = 0; i < td->temp_size; i++) {
             if (!td->temp_points[i].marked) {
@@ -262,7 +262,6 @@ void on_switch_toggled(GtkSwitch* sw, gboolean state, gpointer user_data)
             GtkWidget* curr = create_temp_line(nd, i);
             gtk_box_pack_start(GTK_BOX(wp->temp_box), curr, FALSE, FALSE, 0);
         }
-
         gtk_widget_show_all(wp->temp_box);
         sd->state_change = false;
         pthread_mutex_unlock(nd->sd->temp_lock);
