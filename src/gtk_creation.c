@@ -57,7 +57,6 @@ GtkWidget* create_temp_line(natt_data* nd, int index)
     gtk_widget_set_hexpand(temp, TRUE);
     gtk_grid_attach(GTK_GRID(grid), temp, 1, 0, 1, 1);
 
-
     GtkWidget* button = gtk_button_new_with_label("Delete");
     gtk_widget_set_halign(button, GTK_ALIGN_END);
     gtk_widget_set_valign(button, GTK_ALIGN_CENTER);
@@ -195,7 +194,6 @@ void on_new_window_activate(GtkWidget* widget, gpointer user_data)
     gtk_grid_attach(GTK_GRID(grid), button, 1, 1, 1, 1);
 
     gtk_container_add(GTK_CONTAINER(new_window), grid);
-
 
     gtk_window_set_transient_for(GTK_WINDOW(new_window), GTK_WINDOW(parent));
     gtk_window_set_modal(GTK_WINDOW(new_window), TRUE);
