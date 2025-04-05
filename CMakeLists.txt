@@ -9,23 +9,23 @@ pkg_check_modules(APPINDICATOR REQUIRED ayatana-appindicator3-0.1)
 pkg_check_modules(X11 REQUIRED x11)
 pkg_check_modules(XRANDR REQUIRED xrandr)
 
-add_executable(natt 
-    src/main.c 
-    src/xsctcf.c 
-    src/io.c 
-    src/gtk_creation.c 
-    src/util.c 
-    src/daemon.c
-)
+add_executable(${PROJECT_NAME} src/main.c)
 
-target_include_directories(natt PRIVATE 
+aux_source_directory(src SRC)
+
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${GTK3_INCLUDE_DIRS} 
     ${APPINDICATOR_INCLUDE_DIRS}
     ${X11_INCLUDE_DIRS}
     ${XRANDR_INCLUDE_DIRS}
+
+)
+target_sources(${PROJECT_NAME} PRIVATE
+    ${SRC}
 )
 
-target_link_libraries(natt PRIVATE 
+target_link_libraries(${PROJECT_NAME} PRIVATE 
     ${GTK3_LIBRARIES} 
     ${APPINDICATOR_LIBRARIES}
     ${X11_LIBRARIES}

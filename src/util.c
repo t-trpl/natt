@@ -5,13 +5,14 @@ natt_data* create_natt_info()
     natt_data* nd = (natt_data*)malloc(sizeof(natt_data));
     nd->wp = (widget_pointers*)malloc(sizeof(widget_pointers));
     nd->dd = (display_data*)malloc(sizeof(display_data));
-    nd->td = (temperature_data*)malloc(sizeof(temperature_data));
+    nd->td = vec_init();
     nd->sd = (state_data*)malloc(sizeof(state_data));
     nd->sd->active = false;
     nd->sd->state_change = false;
     nd->sd->natt_demon_on = false;
     nd->sd->temp_lock = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(nd->sd->temp_lock, NULL);
+    printf("ok\n");
     return nd;
 }
 

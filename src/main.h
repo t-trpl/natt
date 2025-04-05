@@ -31,4 +31,11 @@ gboolean update_current_label(gpointer user_data);
 void* flux(void* arg);
 gboolean on_clock_daemon(gpointer user_data);
 
+// "Vector" Stuff
+temperature_data* vec_init();
+void push_back(temperature_data* vec, temp_point point);
+int next_power_of_two(int size);
+void purge_marked(temperature_data* vec); 
+void print_vec(temperature_data* vec); 
+
 #endif // MAIN_H

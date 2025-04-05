@@ -30,6 +30,7 @@ typedef struct display_data {
 typedef struct temperature_data {
     temp_point* temp_points;
     int temp_size;
+    int capacity;
 } temperature_data;
 
 typedef struct state_data {
@@ -49,7 +50,7 @@ typedef struct natt_data {
 
 typedef struct line_data {
     natt_data* nd;
-    temp_point* tp;
+    int ind; 
 } line_data;
 
 typedef struct append_data {

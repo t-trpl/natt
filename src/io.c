@@ -62,9 +62,6 @@ void read_config(natt_data* nd)
     FILE *config;
     temperature_data* temp_data = nd->td;
     state_data* sd = nd->sd;
-    temp_data->temp_points = (temp_point*)malloc(sizeof(temp_point) * 100);
-    temp_point* temp_points = temp_data->temp_points;
-    temp_data->temp_size = 0;
     if (access(path, F_OK) != -1) {
         config = fopen(path, "r");
         char line[100];
@@ -83,13 +80,13 @@ void read_config(natt_data* nd)
             //printf("%s\n%s\n%s\n", prefix, suffix, stemp);
             int time = atoi(prefix) * 60 + atoi(suffix);
             int temp = atoi(stemp);
-            int ind = temp_data->temp_size;
-            temp_data->temp_points[ind].time = time;
-            temp_points[ind].color = temp;
-            temp_points[ind].marked = 0;
-            temp_data->temp_size++;
+            temp_point p;
+            p.time = time;
+            p.color = temp;
+            p.marked = false;
+            push_back(temp_data, p);
         }
-        qsort(temp_points, temp_data->temp_size, sizeof(temp_point), compare);
+        qsort(temp_data->temp_points, temp_data->temp_size, sizeof(temp_point), compare);
         fclose(config);
     }
 }

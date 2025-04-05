@@ -1,14 +1,11 @@
 #include "main.h"
 #include "types.h"
 #include "xsctcf.h"
-#include <stdio.h>
 #include <libayatana-appindicator/app-indicator.h>
 
 void destroy_all_children(GtkWidget* widget)
 {
-    if (GTK_CONTAINER(widget)) {
-        gtk_container_forall(GTK_CONTAINER(widget), (GtkCallback)gtk_widget_destroy, NULL);
-    }
+    gtk_container_forall(GTK_CONTAINER(widget), (GtkCallback)gtk_widget_destroy, NULL);
 }
 
 void on_delete_clicked(GtkWidget* button, gpointer user_data) 
@@ -16,8 +13,7 @@ void on_delete_clicked(GtkWidget* button, gpointer user_data)
     line_data* ld = (line_data*)user_data;
     natt_data* nd = ld->nd;
     GtkWidget* parent = gtk_widget_get_parent(button);
-    temp_point* ud = ld->tp;
-    ud->marked = true;
+    nd->td->temp_points[ld->ind].marked = true;
     nd->sd->state_change = true;
     gtk_widget_destroy(parent); 
     gtk_widget_show_all(nd->wp->window);
@@ -65,7 +61,7 @@ GtkWidget* create_temp_line(natt_data* nd, int index)
 
     line_data* ld = (line_data*)malloc(sizeof(line_data));
     ld->nd = nd;
-    ld->tp = &nd->td->temp_points[index];
+    ld->ind = index;
 
     g_signal_connect(button, "clicked", G_CALLBACK(on_delete_clicked), ld);
     gtk_widget_set_sensitive(GTK_WIDGET(button),!nd->sd->natt_demon_on); 
@@ -243,17 +239,7 @@ void on_switch_toggled(GtkSwitch* sw, gboolean state, gpointer user_data)
     
     if (sd->state_change) {
         pthread_mutex_lock(nd->sd->temp_lock);
-        temp_point* points = (temp_point*)malloc(sizeof(temp_point) * 100);
-        int j = 0;
-        for (int i = 0; i < td->temp_size; i++) {
-            if (!td->temp_points[i].marked) {
-                points[j] = td->temp_points[i];
-                j++;
-            }
-        }
-        free(td->temp_points);
-        td->temp_points = points;
-        td->temp_size = j;
+        purge_marked(td);
         qsort(td->temp_points, td->temp_size, sizeof(temp_point), compare);
         destroy_all_children(wp->temp_box);
         for (int i = 0; i < td->temp_size; i++) {
@@ -350,13 +336,15 @@ void on_add_click(GtkWidget* button, gpointer user_data)
         return;
     }
     nd->sd->state_change = true;
-    nd->td->temp_points[nd->td->temp_size].color = temp;
-    nd->td->temp_points[nd->td->temp_size].time = 60 * hours + minutes;
-    nd->td->temp_points[nd->td->temp_size].marked = false;
-    GtkWidget* curr = create_temp_line(nd, nd->td->temp_size);    
+    temp_point p;
+    p.color = temp;
+    p.time = 60 * hours + minutes;
+    p.marked = false;
+    int old_size = nd->td->temp_size;
+    push_back(nd->td, p);
+    GtkWidget* curr = create_temp_line(nd, old_size);    
     gtk_box_pack_start(GTK_BOX(nd->wp->temp_box), curr, FALSE, FALSE, 0);
     gtk_widget_show_all(nd->wp->window);
-    nd->td->temp_size++;
 }
 
 GtkWidget* create_append_box(natt_data* nd)
