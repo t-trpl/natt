@@ -1,6 +1,8 @@
-#include "main.h"
-#include "types.h"
 #include "xsctcf.h"
+#include "daemon.h"
+#include "vector.h"
+#include "util.h"
+#include "io.h"
 #include <libayatana-appindicator/app-indicator.h>
 
 void on_delete_clicked(GtkWidget* button, gpointer user_data) 

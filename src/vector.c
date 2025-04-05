@@ -1,4 +1,4 @@
-#include "types.h"
+#include "vector.h"
 #include "stdio.h"
 
 temperature_data* vec_init()
@@ -18,7 +18,6 @@ void print_data(temperature_data* vec)
         }
         else {
             printf("time:%d color:%d marked:%d\n", 0, 0, 0);
-            vec->temp_points[i].color++;
         }
     }
 }

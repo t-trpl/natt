@@ -1,4 +1,4 @@
-#include "main.h"
+#include "vector.h"
 
 natt_data* create_natt_info()
 {
@@ -12,7 +12,6 @@ natt_data* create_natt_info()
     nd->sd->natt_demon_on = false;
     nd->sd->temp_lock = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(nd->sd->temp_lock, NULL);
-    printf("ok\n");
     return nd;
 }
 

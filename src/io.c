@@ -1,6 +1,8 @@
-#include "main.h"
 #include <fcntl.h>
 #include <sys/stat.h>
+#include "io.h"
+#include "util.h"
+#include "vector.h"
 
 void write_config(natt_data* nd)
 {

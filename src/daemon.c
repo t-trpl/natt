@@ -1,5 +1,7 @@
-#include "main.h"
+#include "daemon.h"
+#include "xsctcf.h"
 #include <time.h>
+#include "gtk_creation.h"
 
 void* flux(void* arg)
 {

@@ -1,4 +1,7 @@
-#include "main.h"
+#include "types.h"
+#include "xsctcf.h"
+#include "util.h"
+#include "gtk_creation.h"
 
 int main(int argc, char* argv[])
 {
