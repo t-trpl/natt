@@ -3,7 +3,6 @@
 
 temperature_data* vec_init()
 {
-
     temperature_data* ptr = (temperature_data*)malloc(sizeof(temperature_data));
     ptr->temp_points = (temp_point*)malloc(sizeof(temp_point) * 16);
     ptr->temp_size = 0;
