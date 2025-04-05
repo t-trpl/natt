@@ -33,4 +33,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     m
 )
 
-target_compile_options(natt PRIVATE ${GTK3_CFLAGS_OTHER} -O2 -Wall)
+target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER} -O2 -Wall)
