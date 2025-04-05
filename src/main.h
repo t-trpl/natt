@@ -9,7 +9,6 @@ void write_config(natt_data* nd);
 char* trim_spaces(char* str);
 void read_config(natt_data* nd);
 int compare(const void* a, const void *b);
-void destroy_all_children(GtkWidget* widget);
 void on_delete_clicked(GtkWidget* button, gpointer user_data);
 GtkWidget* create_temp_line(natt_data* nd, int index);
 void update_add_button_sensitivity(GtkWidget* child, gpointer data);

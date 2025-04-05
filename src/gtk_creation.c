@@ -3,11 +3,6 @@
 #include "xsctcf.h"
 #include <libayatana-appindicator/app-indicator.h>
 
-void destroy_all_children(GtkWidget* widget)
-{
-    gtk_container_forall(GTK_CONTAINER(widget), (GtkCallback)gtk_widget_destroy, NULL);
-}
-
 void on_delete_clicked(GtkWidget* button, gpointer user_data) 
 {
     line_data* ld = (line_data*)user_data;
@@ -241,7 +236,7 @@ void on_switch_toggled(GtkSwitch* sw, gboolean state, gpointer user_data)
         pthread_mutex_lock(nd->sd->temp_lock);
         purge_marked(td);
         qsort(td->temp_points, td->temp_size, sizeof(temp_point), compare);
-        destroy_all_children(wp->temp_box);
+        gtk_container_forall(GTK_CONTAINER(wp->temp_box), (GtkCallback)gtk_widget_destroy, NULL);
         for (int i = 0; i < td->temp_size; i++) {
             GtkWidget* curr = create_temp_line(nd, i);
             gtk_box_pack_start(GTK_BOX(wp->temp_box), curr, FALSE, FALSE, 0);
