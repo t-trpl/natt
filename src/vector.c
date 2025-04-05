@@ -1,20 +1,6 @@
 #include "types.h"
 #include "stdio.h"
 
-/*
-typedef struct temperature_data {
-    temp_point* temp_points;
-    int temp_size;
-    int capacity;
-} temperature_data;
-
-typedef struct temp_point {
-    int color;
-    int time;
-    bool marked;
-} temp_point;
-*/
-
 temperature_data* vec_init()
 {
 
@@ -28,7 +14,7 @@ temperature_data* vec_init()
 void print_data(temperature_data* vec) 
 {
     for (int i = 0; i < vec->capacity; i++) {
-        if(i < vec->temp_size) {
+        if (i < vec->temp_size) {
             printf("time:%d color:%d marked:%d\n", vec->temp_points[i].time, vec->temp_points[i].color, vec->temp_points[i].marked);
         }
         else {
@@ -74,7 +60,7 @@ void purge_marked(temperature_data* vec)
 {
     int size = vec->temp_size;
     for (int i = 0; i < vec->temp_size; i++) {
-        if(vec->temp_points[i].marked) {
+        if (vec->temp_points[i].marked) {
             size--;
         }
     }
